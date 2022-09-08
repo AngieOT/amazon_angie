@@ -9,21 +9,21 @@ using ProyectoCiclo3.App.Dominio;
  
 namespace ProyectoCiclo3.App.Frontend.Pages
 {
-    public class ListServicioModel : PageModel
+    public class DetailsServicioModel : PageModel
     {
-
-        private readonly RepositorioServicios repositorioServicios;
-        public IEnumerable<Servicio> Servicios {get;set;}
+       private readonly RepositorioServicios repositorioServicios;
+        public Servicio Servicio {get;set;}
  
-        public ListServicioModel(RepositorioServicios repositorioServicios)
-        {
+        public DetailsServicioModel(RepositorioServicios repositorioServicios)
+       {
             this.repositorioServicios=repositorioServicios;
-        }
-
-
-        public void OnGet()
+       }
+ 
+        public IActionResult OnGet(int servicioId)
         {
-            Servicios=repositorioServicios.GetAll();
+            Servicio=repositorioServicios.GetWithId(servicioId);
+            return Page();
+ 
         }
     }
 }

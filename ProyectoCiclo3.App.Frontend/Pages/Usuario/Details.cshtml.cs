@@ -9,21 +9,21 @@ using ProyectoCiclo3.App.Dominio;
  
 namespace ProyectoCiclo3.App.Frontend.Pages
 {
-    public class ListUsuarioModel : PageModel
+    public class DetailsUsuarioModel : PageModel
     {
-
-        private readonly RepositorioUsuarios repositorioUsuarios;
-        public IEnumerable<Usuario> Usuarios {get;set;}
+       private readonly RepositorioUsuarios repositorioUsuarios;
+        public Usuario Usuario {get;set;}
  
-        public ListUsuarioModel(RepositorioUsuarios repositorioUsuarios)
-        {
+        public DetailsUsuarioModel(RepositorioUsuarios repositorioUsuarios)
+       {
             this.repositorioUsuarios=repositorioUsuarios;
-        }
-
-
-        public void OnGet()
+       }
+ 
+        public IActionResult OnGet(int usuarioId)
         {
-            Usuarios=repositorioUsuarios.GetAll();
+            Usuario=repositorioUsuarios.GetWithId(usuarioId);
+            return Page();
+ 
         }
     }
 }
