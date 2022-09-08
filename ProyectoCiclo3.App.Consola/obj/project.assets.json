@@ -1521,12 +1521,23 @@
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "ProyectoCiclo3.App.Dominio/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/ProyectoCiclo3.App.Dominio.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ProyectoCiclo3.App.Dominio.dll": {}
+        }
+      },
       "ProyectoCiclo3.App.Persistencia/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "5.0.0",
-          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.0"
+          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.0",
+          "ProyectoCiclo3.App.Dominio": "1.0.0"
         },
         "compile": {
           "bin/placeholder/ProyectoCiclo3.App.Persistencia.dll": {}
@@ -5802,6 +5813,11 @@
         "system.xml.xmlserializer.4.3.0.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
+    },
+    "ProyectoCiclo3.App.Dominio/1.0.0": {
+      "type": "project",
+      "path": "../ProyectoCiclo3.App.Dominio/ProyectoCiclo3.App.Dominio.csproj",
+      "msbuildProject": "../ProyectoCiclo3.App.Dominio/ProyectoCiclo3.App.Dominio.csproj"
     },
     "ProyectoCiclo3.App.Persistencia/1.0.0": {
       "type": "project",
