@@ -1,16 +1,20 @@
 @page
-@model ProyectoCiclo3.App.Frontend.Pages.FormServicioModel
+@model ProyectoCiclo3.App.Frontend.Pages.EditServicioModel
 @{
+    var servicio = Model.Servicio;
+    
 }
 
 <div class="text-center">
   <form method="post">
+    <input type="number" class="form-control d-none" id="id" name="id" placeholder="id" value="@servicio.id" readonly>
+
     <label for="origen" class="form-label">Origen:</label>
     <select name="origen" class="form-control">
       <option value="">-</option>
       @foreach (var usuario in Model.Usuarios)
       {
-        <option value="@usuario.id">@usuario.nombre @usuario.apellidos - @usuario.ciudad</option>
+        <option value="@usuario.id" >@usuario.nombre @usuario.apellidos - @usuario.ciudad</option>
       }
     </select>
     <label for="destino" class="form-label">Destino:</label>
@@ -18,15 +22,15 @@
       <option value="">-</option>
       @foreach (var usuario in Model.Usuarios)
       {
-        <option value="@usuario.id">@usuario.nombre @usuario.apellidos - @usuario.ciudad</option>
+        <option value="@usuario.id" >@usuario.nombre @usuario.apellidos - @usuario.ciudad</option>
       }
     </select>
 
     <label for="fecha" class="form-label">Fecha:</label>
-    <input type="date" class="form-control" id="fecha" placeholder="Fecha" name="fecha" required>
+    <input type="date" class="form-control" id="fecha" placeholder="Fecha" name="fecha" required value="@servicio.fecha">
 
     <label for="hora" class="form-label">Hora:</label>
-    <input type="time" class="form-control" id="hora" placeholder="Hora" name="hora" required>
+    <input type="time" class="form-control" id="hora" placeholder="Hora" name="hora" required value="@servicio.hora">
 
     <label for="encomienda" class="form-label">Encomienda:</label>
     <select name="encomienda" class="form-control" required>

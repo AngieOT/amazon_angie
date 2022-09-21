@@ -6,27 +6,51 @@ using System;
 namespace ProyectoCiclo3.App.Persistencia.AppRepositorios
 {
     public class RepositorioUsuarios
-    {
-        List<Usuario> Usuarios;
- 
-    public RepositorioUsuarios()
+    { 
+        
+        private readonly AppContext _appContext = new AppContext();   
+
+        public IEnumerable<Usuario> GetAll()
         {
-            Usuarios= new List<Usuario>()
-            {
-                new Usuario{id=1,nombre="Ana",apellidos= "Perez",direccion= "cll 12 45N12",telefono= "3207650934"},
-                new Usuario{id=2,nombre="Felipe",apellidos= "Ortiz",direccion= "Cr 15b 12-07",telefono= "3007680923"},
-                new Usuario{id=3,nombre="Juan",apellidos= "Carvajal",direccion= "cll 34N 3-02",telefono= "3139083312",}
- 
-            };
+           return _appContext.Usuarios;
         }
  
-        public IEnumerable<Usuario> GetAll() //retorna todo
+        public Usuario GetWithId(int id){
+            return _appContext.Usuarios.Find(id);
+        }
+
+        public Usuario Update(Usuario newUsuario){
+            var usuario = _appContext.Usuarios.Find(newUsuario.id);
+            if(usuario != null){
+                usuario.nombre = newUsuario.nombre;
+                usuario.apellidos = newUsuario.apellidos;
+                usuario.direccion = newUsuario.direccion;
+                usuario.telefono = newUsuario.telefono;
+                usuario.ciudad = newUsuario.ciudad;
+                //Guardar en base de datos
+                 _appContext.SaveChanges();
+            }
+        return usuario;
+        }
+
+        public Usuario Create(Usuario newUsuario)
         {
-            return Usuarios;
+           var addUsuario = _appContext.Usuarios.Add(newUsuario);
+            //Guardar en base de datos
+            _appContext.SaveChanges();
+            return addUsuario.Entity;
         }
- 
-        public Usuario GetWithId(int id){ //retorna una en especifico
-            return Usuarios.SingleOrDefault(b => b.id == id);
+
+        public Usuario Delete(int id)
+        {
+            var usuario = _appContext.Usuarios.Find(id);
+        if (usuario != null){
+            _appContext.Usuarios.Remove(usuario);
+            //Guardar en base de datos
+            _appContext.SaveChanges();
         }
+         return null;  
+        }
+
     }
 }

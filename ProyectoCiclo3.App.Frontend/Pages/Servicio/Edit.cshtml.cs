@@ -9,37 +9,39 @@ using ProyectoCiclo3.App.Dominio;
  
 namespace ProyectoCiclo3.App.Frontend.Pages
 {
-    public class FormServicioModel : PageModel
+    public class EditServicioModel : PageModel
     {
+        
         private readonly RepositorioServicios repositorioServicio;
         private readonly RepositorioUsuarios repositorioUsuario;
         private readonly RepositorioEncomiendas repositorioEncomienda;
         public IEnumerable<Usuario> Usuarios {get;set;}
-        public IEnumerable<Encomienda> Encomiendas {get;set;}
-
-       [BindProperty]
+        public IEnumerable<Encomienda> Encomiendas {get;set;}       
+        [BindProperty]
         public Servicio Servicio {get;set;}
  
-        public FormServicioModel(RepositorioServicios repositorioServicio, RepositorioUsuarios repositorioUsuario, RepositorioEncomiendas repositorioEncomienda)
+        public EditServicioModel(RepositorioServicios repositorioServicio, RepositorioUsuarios repositorioUsuario, RepositorioEncomiendas repositorioEncomienda)
        {
             this.repositorioServicio=repositorioServicio;
             this.repositorioUsuario=repositorioUsuario;
             this.repositorioEncomienda=repositorioEncomienda;
        }
-
-        public void OnGet()
+ 
+        public IActionResult OnGet(int servicioId)
         {
+            Servicio=repositorioServicio.GetWithId(servicioId);
             Usuarios=repositorioUsuario.GetAll();
             Encomiendas=repositorioEncomienda.GetAll();
+            return Page(); 
         }
-    
-        public IActionResult OnPost(int origen, int destino, string fecha, string hora, int encomienda)
+
+        public IActionResult OnPost(int id, int origen, int destino, string fecha, string hora, int encomienda)
         {
             if(!ModelState.IsValid)
             {
                 return Page();
             }
-            Servicio = repositorioServicio.Create(origen, destino, fecha, hora, encomienda);            
+            Servicio = repositorioServicio.Update(id, origen, destino, fecha, hora, encomienda);            
             return RedirectToPage("./List");
         }
 

@@ -22,8 +22,7 @@ namespace ProyectoCiclo3.App.Frontend.Pages
         public IActionResult OnGet(int servicioId)
         {
             Servicio=repositorioServicios.GetWithId(servicioId);
-            return Page();
- 
+            return Page(); 
         }
     }
 }
